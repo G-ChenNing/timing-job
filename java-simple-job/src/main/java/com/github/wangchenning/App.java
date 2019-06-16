@@ -36,11 +36,12 @@ public class App {
      */
     public static LiteJobConfiguration configuration() {
         //job核心配置
-        JobCoreConfiguration jcc = JobCoreConfiguration.newBuilder("mySimpleJob", "0/10 * * * * ?", 2).build();
+        JobCoreConfiguration jcc = JobCoreConfiguration.newBuilder("mySimpleJob", "0/5 * * * * ?", 2).build();
         //job类型配置
         JobTypeConfiguration jtc = new SimpleJobConfiguration(jcc, MySimpleJob.class.getCanonicalName());
         //job根的配置(LiteJobConfiguration)
-        LiteJobConfiguration ljc = LiteJobConfiguration.newBuilder(jtc).build();
+        LiteJobConfiguration ljc = LiteJobConfiguration.newBuilder(jtc)
+                .overwrite(true).build();
         return ljc;
     }
 }
